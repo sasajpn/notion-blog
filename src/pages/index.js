@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export async function getServerSideProps() {
   const res = await fetch("http://localhost:3000/api/v1/posts");
   const posts = await res.json();
@@ -14,7 +16,9 @@ export default function Home({ posts }) {
     <div>
       {posts.map((post) => (
         <div key={post.id}>
-          <h2>{post.title}</h2>
+          <Link href={`/blog/${post.slug}`}>
+            {post.title}
+          </Link>
           {/* Render other post details */}
         </div>
       ))}

@@ -4,6 +4,12 @@ import notion from "../../../lib/notion";
 export default async (req, res) => {
   const response = await notion.databases.query({
     database_id: process.env.NOTION_DATABASE_ID,
+    filter: {
+        property: "Slug",
+        rich_text: {
+         "equals": slug   
+        }
+    }
   });
 
   const posts = response.results.map((page) => {
